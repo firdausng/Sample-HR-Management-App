@@ -1,0 +1,108 @@
+<form nz-form [formGroup]="leaveRequestForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+        <nz-form-label [nzSpan]="0" nzFor="leaveType">Leave Type</nz-form-label>
+        <nz-form-control [nzSpan]="2">
+            <nz-select formControlName="leaveType">
+                <nz-option *ngFor="let leave of leaveTypeList" [nzValue]="leave" [nzLabel]="leave"></nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+
+    
+
+        <ng-container *ngIf="leaveRequestForm.get('leaveDateList')">
+            <ng-container formArrayName="leaveDateList" *ngFor="let control of leaveRequestForm.get('leaveDateList').controls; let i = index">
+                <div nz-row [nzGutter]="2" class="block">
+                <ng-container [formGroupName]="i">
+                    <div nz-col [nzXs]="4" [nzMd]="1">
+                        <nz-form-item>
+                            <nz-form-control [nzSpan]="1">
+                                <i nz-icon nzType="minus-circle-o" class="dynamic-delete-button"
+                                    (click)="removeField(i, $event)"></i>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+    
+                    <div nz-col [nzXs]="20" [nzMd]="10">
+                        <nz-form-item>
+                            <!-- <nz-form-label [nzSpan]="0" *ngIf="i == 0" [nzFor]="control.controlInstance">Date
+                        </nz-form-label> -->
+                            <nz-form-control [nzSpan]="11">
+                                <nz-range-picker formControlName="date"></nz-range-picker>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+    
+                    <div nz-col [nzXs]="24" [nzMd]="11">
+                        <nz-form-item>
+                            <nz-form-label nzFor="dayType">Leave Type</nz-form-label>
+                            <nz-form-control [nzSpan]="10">
+                                <nz-select formControlName="dayType">
+                                    <nz-option *ngFor="let duration of leaveDurationList" [nzValue]="duration"
+                                        [nzLabel]="duration">
+                                    </nz-option>
+                                </nz-select>
+                            </nz-form-control>
+                        </nz-form-item>
+                    </div>
+                </ng-container>
+            </div>
+            </ng-container>
+        </ng-container>
+        
+
+
+
+
+    <nz-form-item>
+        <nz-form-control [nzSpan]="0">
+            <button nz-button nzType="dashed" class="add-button" (click)="addField($event)">
+                <i nz-icon nzType="plus"></i>
+                Add Date
+            </button>
+        </nz-form-control>
+    </nz-form-item>
+
+
+    <!-- 
+    <nz-form-item>
+        <nz-form-label [nzSpan]="0">RangePicker</nz-form-label>
+        <nz-form-control [nzSm]="16" [nzXs]="24">
+            <nz-range-picker formControlName="rangePicker"></nz-range-picker>
+        </nz-form-control>
+    </nz-form-item> 
+    -->
+
+
+
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="0" nzFor="file">Attachment</nz-form-label>
+        <nz-form-control [nzSpan]="14">
+            <!-- <input nz-input name="file" type="text" id="file" formControlName="file"> -->
+            <nz-upload nzAction="https://www.mocky.io/v2/5cc8019d300000980a055e76" nzListType="picture"
+                [(nzFileList)]="attachmentList" (nzChange)="handleChange($event)">
+                <button nz-button><i nz-icon nzType="upload"></i>Upload</button>
+            </nz-upload>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-label [nzSpan]="0">Description</nz-form-label>
+        <nz-form-control [nzSpan]="14" nzErrorTip="Please write something here!">
+            <textarea formControlName="description" nz-input rows="2" placeholder="description"></textarea>
+        </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+        <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 16, offset: 8 }">
+            <button nz-button nzType="primary">Submit</button>
+        </nz-form-control>
+    </nz-form-item>
+
+</form>
+
+
+<p>
+    Form Status: {{ leaveRequestForm.status }}
+</p>

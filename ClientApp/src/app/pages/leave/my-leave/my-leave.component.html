@@ -1,0 +1,24 @@
+<nz-table #fixedTable [nzData]="listOfData" [nzScroll]="{ x: '1150px', y: '240px' }">
+    <thead>
+      <tr>
+        <th nzLeft>Date</th>
+        <th nzLeft>Leave Type</th>
+        <th>Number Of Day</th>
+        <th>Status</th>
+        <th>Comment</th>
+        <th nzRight>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of fixedTable.data">
+        <td nzLeft>{{ data.date }}</td>
+        <td nzLeft>{{ data.leaveType }}</td>
+        <td>{{ data.noOfDay }}</td>
+        <td>{{ data.comment }}</td>
+        <td>{{ data.status }}</td>
+        <td nzRight>
+          <a>action</a>
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>

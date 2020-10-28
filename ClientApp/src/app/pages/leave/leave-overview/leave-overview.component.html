@@ -1,0 +1,22 @@
+<nz-table #entitlementTable [nzData]="entitlementList">
+    <thead>
+      <tr>
+        <th>Leave Type</th>
+        <th>Entitlement Type</th>
+        <th>Valid From</th>
+        <th>Valid To</th>
+        <th>Days</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of entitlementTable.data">
+        <td>{{ data.leaveType }}</td>
+        <td>{{ data.entitlementType }}</td>
+        <td>{{ data.validFrom }}</td>
+        <td>{{ data.validTo }}</td>
+        <td>{{ data.totalDays }}</td>
+
+      </tr>
+    </tbody>
+  </nz-table>
+
